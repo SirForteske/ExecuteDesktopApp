@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+
+	<title>Launch Process</title> 
+		
+</head> 
+ 
+<body> 
+	<div style="text-align: center;">
+		<div>
+			<h2>Send Messages to a Process!</h2>
+		</div>
+		<div id="myAppletDiv">
+			<script>
+				
+			</script>
+		</div>
+		<div style="padding-top:20px;background-color:#ccc;">
+			<div>
+				Enter the process to open:
+				<input id="tbxProcess" type="text" style="width:150px"></input>
+			</div>
+			<div>
+				Enter some parameters (optional):
+				<input id="tbxParams" type="text" style="width:150px"></input>
+			</div>
+			<button id="btnExecuteProcess" >Execute</button>
+		</div>
+		<div style="padding-top:20px;">		
+			Enter a message to send to the process:
+			<input id="tbxMessage" type="text" style="width:150px"></input>
+			<button id="btnSendMessage" >Send Message</button>
+		</div>
+	
+	</div>
+	
+	<!-- Scripts -->
+	<script src="js/deployJava.js"></script>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script>		
+		$(document).ready(function(){
+			function docWriteWrapper(func) {
+				var writeTo = document.createElement('del'),
+					oldwrite = document.write,
+					content = '';
+				writeTo.id = "me";
+				document.write = function(text) {
+					content += text;
+				}
+				func();
+				writeTo.innerHTML += content;
+				document.write = oldwrite;
+				document.body.appendChild(writeTo);
+			}
+			
+			var attributes = { id:"desktopProcess", code:"ShellUtilitiesApplet",  width:0, height:0};
+			var parameters = { jnlp_href: "launchApplet.jnlp" };
+				
+			docWriteWrapper(function() {
+				deployJava.runApplet(attributes, parameters, "1.6");
+			});
+		
+			$('#btnSendMessage').click(function() {
+				//$("#desktopProcess").SendMessage($(this).focusout().val());
+				document.getElementById("desktopProcess").SendKeys($('#tbxMessage').focusout().val());
+			});
+			
+			$('#btnExecuteProcess').click(function() {
+				//$("#desktopProcess").SendMessage($(this).focusout().val());
+				document.getElementById("desktopProcess").openProcess($('#tbxProcess').focusout().val(), $('#tbxParams').focusout().val());
+			});
+		});
+
+		
+		//	deployJava.createWebStartLaunchButton("launch.jnlp", '1.7.0');
+				
+	</script>
+</body> 
+</html> 

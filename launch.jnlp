@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://localhost:8080/ExecuteDesktopApp/" href="launch.jnlp">
+    <information>
+        <title>Notepad Launcher</title>
+        <vendor>Datum</vendor>
+    </information>
+	<security>
+		<all-permissions/>
+	</security>
+    <resources>
+        <!-- Application Resources -->
+        <j2se version="1.7+"
+            href="http://java.sun.com/products/autodl/j2se" />
+        <jar href="bin/ShellUtilitiesApp.jar" main="true" />
+		<nativelib href="bin/natives.jar" download="eager" />
+    </resources>
+    <application-desc 
+         name="ShellCommandExecuterApp"
+         main-class="com.dcg.shell.ShellCommandExecuterApp" >
+     </application-desc>
+     <update check="background"/>
+</jnlp> 

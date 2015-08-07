@@ -1,0 +1,2 @@
+cd "C:\Program Files (x86)\Java\jdk1.7.0_17\bin"
+jarsigner -keystore "C:\Users\Aleix\DATUM\Java\Keystore\aleixks.jks" -storepass aleix-test "C:\xampp\tomcat\webapps\ROOT\ExecuteDesktopApp\bin\resources.jar" aleix
